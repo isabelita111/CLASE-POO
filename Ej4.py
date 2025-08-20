@@ -1,79 +1,66 @@
 class Cuenta:
-    def __init__(self, numero_cuenta, nombre, saldo):
-        self.numero_cuenta = numero_cuenta
-        self.nombre = nombre
-        self.saldo = saldo
-    def depositar(self, monto):
-        if monto > 0:
-            self.saldo += monto
-            print(f"Se depositaron {monto} en la cuenta de {self.nombre}.")
-        else:
-            print("El monto debe ser mayor que cero.")
-    def retirar(self, monto):
-        if monto <= self.saldo:
-            self.saldo -= monto
-            print(f"Se retiraron ${monto} de la cuenta de {self.nombre}.")
-        else:
-            print(f"Fondos insuficientes. Saldo actual: ${self.saldo}")
-    def mostrar_saldo(self):
-        print(f"Cuenta: {self.numero_cuenta} Titular: {self.nombre} Saldo: ${self.saldo}")
-cuentas=[]
-def buscar_cuenta(numero):
-    for cuenta in cuentas:
-        if cuenta.numero_cuenta == numero:
-            return cuenta
-    return None
+    def __init__(self,ususario, numero_cuenta):
+        self.ususario= ususario
+        self.nueva_cuenta= nueva_cuenta
+        self.saldo= 0
 
+    def depositar(self, cantidad):
+        self.saldo = self.saldo + cantidad
+        return self.saldo
+
+    def retirar(self, saldo):
+        if self.saldo >= cantidad:
+            self.saldo = self.saldo - cantidad
+            return self.saldo
+        else:
+            print("Dinero insuficiente para el retiro")
+            return -1
+
+    def consultar(self):
+        return self.saldo
+
+#programa principal
+Cuentas = []
+
+print("Bienvenido al banco trululu")
 while True:
-    print(" SISTEMA BANCARIO")
-    print("1. Crear nueva cuenta")
-    print("2. Depositar dinero")
-    print("3. Retirar dinero")
+    print("INGRESE LA OPCION DESEADA")
+    print("1. Registrar cuenta")
+    print("2. Depositar")
+    print("3. Retirar")
     print("4. Consultar saldo")
-    print("5. Salir")
+    print("0. Salir")
+    
+    opcion = int(input())
 
-    opcion = input("Elige una opción: ")
+    if opcion == 1:
+        nombre = input("ingrese el nobre del titular")
+        numero_cuenta = int(input("ingrese nuero de cuenta"))
+        nueva_cuenta = Cuenta(ususario, numero_cuenta)
+        Cuentas.append(nueva_cuenta)
+        print("Cuenta creada exitosamente")
+    
+    elif opcion== 2:
+        numero_cuenta = int(input("ingrese el numero de cuenta"))
+        
+    
+    elif opcion == 3:
+        numero_cuenta = int(input("ingrese numero de cuenta"))
+        existe = False
+        for cuenta in Cuentas:
+            if cuenta.numero_cuenta == numero_cuenta:
+                existe = True
+                cantidad = float(input("INGRESE LA CANTIDAD A RETIRAR"))
+                nuevo_saldo = cuenta.retirar(cantidad)
 
-    if opcion == "1":
-        numero = input("Número de cuenta: ")
-        if buscar_cuenta(numero):
-            print("Esa cuenta ya existe.")
-        else:
-            titular = input("Nombre del titular: ")
-            saldo_inicial = float(input("Saldo inicial (puede ser 0): "))
-            nueva_cuenta = Cuenta(numero, titular, saldo_inicial)
-            cuentas.append(nueva_cuenta)
-            print("Cuenta creada con éxito.")
+                if nuevo_saldo  >= 0:
+                    print ("retiro exitoso, su nuevo saldo es," nuevo_saldo)
+        if existe == False:
+            print("La cuenta no exite")
+    
+    elif opcion == 4:
+        numero_cuenta = int(input("ingrese numero de cuenta"))
+        existe = False
+        for cuenta in Cuentas:
+            if cuenta.numero_cuenta ==
 
-    elif opcion == "2":
-        numero = input("Número de cuenta: ")
-        cuenta = buscar_cuenta(numero)
-        if cuenta:
-            monto = float(input("Monto a depositar: "))
-            cuenta.depositar(monto)
-        else:
-            print("Cuenta no encontrada.")
-
-    elif opcion == "3":
-        numero = input("Número de cuenta: ")
-        cuenta = buscar_cuenta(numero)
-        if cuenta:
-            monto = float(input("Monto a retirar: "))
-            cuenta.retirar(monto)
-        else:
-            print("Cuenta no encontrada.")
-
-    elif opcion == "4":
-        numero = input("Número de cuenta: ")
-        cuenta = buscar_cuenta(numero)
-        if cuenta:
-            cuenta.mostrar_saldo()
-        else:
-            print("Cuenta no encontrada.")
-
-    elif opcion == "5":
-        print("Saliendo del sistema bancario. ¡Hasta luego!")
-        break
-
-    else:
-        print("Opción inválida. Intenta de nuevo.")
